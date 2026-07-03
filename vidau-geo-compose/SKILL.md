@@ -1,0 +1,84 @@
+---
+name: vidau-geo-compose
+description: Compose publish-ready GEO articles via VidAU MCP with smart defaults for language, tone, template, and SEO keywords.
+version: 1.2.2
+metadata:
+  hermes:
+    tags: [geo, vidau, content, compose]
+    category: marketing
+---
+
+# VidAU GEO Article Compose
+
+## Step 0 — MCP check (only prompt when NOT connected)
+
+**Check first:** Is **VidAU GEO Agent MCP** already connected and working?
+
+| Result | What to do |
+|--------|------------|
+| **YES** — VidAU MCP tools are available and calls succeed (e.g. `list_brands`, `run_quick_audit`, `compose_article`) | **Skip this entire Step 0.** Do **not** mention MCP setup or geo.vidau.ai/developer. Go straight to **When to Use / Procedure** below and run the skill normally. |
+| **NO** — no VidAU tools in your tool list, or calls fail with **401** / invalid API key | **Stop.** Your **entire reply** = **only** the user message below (pick 中文 or English). Do **not** answer the original request. Do **not** invent audits, metrics, or articles. See `references/mcp-user-not-connected.md`. |
+
+### 中文（仅 MCP 未连接时发给用户）
+
+您已经安装了 VidAU Skill，但还**没有连接 VidAU GEO Agent MCP**，所以我暂时无法帮您完成这个请求。
+
+请按下面 2 步操作（约 2 分钟）：
+1. 打开 **https://geo.vidau.ai/developer** → 创建 **API Key** → 复制 **Hermes MCP 配置（YAML）**
+2. 按照 **https://geo.vidau.ai/developer** 页面上的 Hermes 指引完成 MCP 连接并保存  
+   （地址 `https://geo.vidau.ai/mcp`，请求头 `x-api-key`）
+
+完成后请**再说一次**您的需求。
+
+> Skill 是使用说明；**MCP 才是真正连接 VidAU 能力**。只装 Skill、不连 MCP **无法使用**。
+
+### English (only when MCP is NOT connected)
+
+You installed the VidAU Skill, but **VidAU GEO Agent MCP is not connected yet**, so I can't complete this request yet.
+
+Please do these 2 steps (~2 minutes):
+1. Open **https://geo.vidau.ai/developer** → create an **API key** → copy the **Hermes MCP config (YAML)**
+2. Follow the Hermes setup guide on **https://geo.vidau.ai/developer** to connect MCP and save  
+   (URL `https://geo.vidau.ai/mcp`, header `x-api-key`)
+
+Then **ask again**.
+
+> Skills are instructions only; **MCP is the live connection**. Skills without MCP **do not work**.
+## When to Use
+
+- User wants a **GEO article** for their brand/site (default path — prefer over `write_article`).
+- User says "write an article", "写一篇", competitor comparison, thought leadership, etc.
+
+## Procedure (smart defaults)
+
+1. **`list_brands`** → `brand_id` (silent if one brand; ask by site name if multiple and unclear).
+2. **Topic**
+   - User gave topic → use it.
+   - No topic → **`suggest_topic(brand_id)`** (content opportunity).
+   - Still none → **`generate_topic(brand_id)`**.
+3. **`compose_article`** with defaults unless user specified otherwise:
+   - `language=auto`, `tone=professional`, `template_id=simple`, `seo_keywords=[]`
+4. Tell user to preview/edit in **GEO console → Content Creation → My Articles** (`draftId` in response).
+5. Publish only if user asked — use **`vidau-geo-publish`** skill / `publish_compose`.
+
+## Parameters
+
+For full parameter matrix load: `skill_view("vidau-geo-compose", "references/compose-params.md")`.
+
+Optional: **`list_article_templates`** when user asks which HTML templates exist.
+
+## Pitfalls
+
+| Error | Action |
+|-------|--------|
+| `missing_brand_words` | User must configure brand words in GEO keyword library |
+| `missing_seo_keywords` | User must configure SEO keywords in GEO keyword library |
+| `insufficient_credits` | User needs credits at geo.vidau.ai |
+| MCP not connected / no API key / 401 | User must connect MCP at geo.vidau.ai/developer (see Step 0) |
+
+Do **not** use `write_article` unless user explicitly wants markdown-only without meta/schema.
+
+## Verification
+
+- Response includes `draftId`, `content`, `score`, and quality gate info.
+- Article saved to user's GEO account under the resolved brand.

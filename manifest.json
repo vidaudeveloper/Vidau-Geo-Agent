@@ -1,0 +1,139 @@
+{
+  "version": "1.1.2",
+  "package": "vidau-geo-skills",
+  "publisher": "VidAU GEO Agent",
+  "repository": "https://github.com/vidaudeveloper/Vidau-Geo-Agent",
+  "baseUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main",
+  "cdnUrl": "https://geo.vidau.ai/skills",
+  "minHermesVersion": "0.1.0",
+  "skills": [
+    {
+      "id": "vidau-geo-mcp-setup",
+      "name": "vidau-geo-mcp-setup",
+      "version": "1.0.2",
+      "title": { "en": "Connect MCP first", "zh": "先连接 MCP" },
+      "description": {
+        "en": "Only when MCP is missing: prompt user to connect at geo.vidau.ai/developer. Skip entirely if MCP already works.",
+        "zh": "仅当 MCP 未连接时提示用户去 geo.vidau.ai/developer 连接；MCP 已可用则跳过，不打扰用户。"
+      },
+      "tools": [],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-mcp-setup/SKILL.md",
+      "userExample": {
+        "en": "(Auto — shown when VidAU MCP is not connected.)",
+        "zh": "（自动 — 未连接 VidAU MCP 时提示用户。）"
+      }
+    },
+    {
+      "id": "vidau-geo-quick-audit",
+      "name": "vidau-geo-quick-audit",
+      "version": "1.2.2",
+      "title": { "en": "GEO 60s snapshot", "zh": "GEO 60 秒快照" },
+      "description": {
+        "en": "60-second GEO visibility snapshot for any URL with HTML report download.",
+        "zh": "对任意 URL 做 60 秒 GEO 快照，返回 HTML 报告下载链接。"
+      },
+      "tools": ["run_quick_audit"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-quick-audit/SKILL.md",
+      "userExample": {
+        "en": "Run a 60-second GEO snapshot for https://www.example.com and give me the HTML report link.",
+        "zh": "给 https://www.example.com 做一个 60 秒 GEO 快照，把 HTML 报告下载链接给我。"
+      }
+    },
+    {
+      "id": "vidau-geo-full-audit",
+      "name": "vidau-geo-full-audit",
+      "version": "1.2.2",
+      "title": { "en": "Full GEO audit", "zh": "完整 GEO 审计" },
+      "description": {
+        "en": "Full multi-agent GEO audit for any URL with prioritized action plan and HTML report.",
+        "zh": "对任意 URL 做完整 GEO 审计，含行动建议与 HTML 报告。"
+      },
+      "tools": ["run_geo_audit"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-full-audit/SKILL.md",
+      "userExample": {
+        "en": "Run a full GEO audit for https://www.example.com.",
+        "zh": "给 https://www.example.com 做一次完整 GEO 审计。"
+      }
+    },
+    {
+      "id": "vidau-geo-brand-insights",
+      "name": "vidau-geo-brand-insights",
+      "version": "1.3.2",
+      "title": { "en": "Brand monitoring insights", "zh": "品牌监测洞察" },
+      "description": {
+        "en": "Overview KPIs (visibility, citation, SOV, sentiment) plus drill-down for tracked brands.",
+        "zh": "已跟踪品牌的 Overview 核心指标（可见度、引用率、SOV、情感分）及下钻分析。"
+      },
+      "tools": ["list_brands", "brand_overview", "citations", "opportunities", "leaderboard"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-brand-insights/SKILL.md",
+      "userExample": {
+        "en": "How is our brand doing this week — visibility, citations, SOV, and sentiment?",
+        "zh": "我们品牌这周在大模型里的可见度、引用率、SOV 和情感分怎么样？"
+      }
+    },
+    {
+      "id": "vidau-geo-compose",
+      "name": "vidau-geo-compose",
+      "version": "1.2.2",
+      "title": { "en": "Write GEO article (compose)", "zh": "写 GEO 文章（完整 compose）" },
+      "description": {
+        "en": "Compose publish-ready GEO articles with meta, schema, and quality checks via VidAU MCP.",
+        "zh": "通过 VidAU MCP 生成含 meta/schema/质检的 GEO 文章。"
+      },
+      "tools": ["list_brands", "suggest_topic", "generate_topic", "compose_article", "list_article_templates"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-compose/SKILL.md",
+      "userExample": {
+        "en": "Write a GEO competitor comparison article for our site.",
+        "zh": "帮我们写一篇 GEO 竞品对比文章。"
+      }
+    },
+    {
+      "id": "vidau-geo-publish",
+      "name": "vidau-geo-publish",
+      "version": "1.2.2",
+      "title": { "en": "Publish to WordPress/Shopify", "zh": "发布到 WordPress/Shopify" },
+      "description": {
+        "en": "Publish compose_article output to WordPress or Shopify via publish_compose.",
+        "zh": "将 compose 结果发布到 WordPress 或 Shopify。"
+      },
+      "tools": ["list_connectors", "publish_compose"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-publish/SKILL.md",
+      "userExample": {
+        "en": "Publish the article you just wrote to WordPress as a draft.",
+        "zh": "把刚才写的文章以草稿形式发布到 WordPress。"
+      }
+    },
+    {
+      "id": "vidau-geo-write-draft",
+      "name": "vidau-geo-write-draft",
+      "version": "1.2.2",
+      "title": { "en": "Markdown draft only", "zh": "仅 Markdown 草稿" },
+      "description": {
+        "en": "Lightweight article draft without meta/schema — use compose skill by default.",
+        "zh": "仅生成 Markdown 正文，不含 meta/schema；默认请用 compose Skill。"
+      },
+      "tools": ["list_brands", "write_article"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-write-draft/SKILL.md",
+      "userExample": {
+        "en": "Draft a short markdown article outline only, no meta tags.",
+        "zh": "只要 Markdown 草稿，不要 meta 和 schema。"
+      }
+    },
+    {
+      "id": "vidau-geo-automation",
+      "name": "vidau-geo-automation",
+      "version": "1.2.2",
+      "title": { "en": "Content automation", "zh": "内容自动化" },
+      "description": {
+        "en": "Run or schedule topic→compose→quality→publish pipelines via VidAU MCP.",
+        "zh": "通过 MCP 执行或定时「选题→写稿→质检→发布」流水线。"
+      },
+      "tools": ["run_content_automation", "wait_for_content_automation_run", "update_content_automation_settings"],
+      "installUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/vidau-geo-automation/SKILL.md",
+      "userExample": {
+        "en": "Run the full automation pipeline now and publish to WordPress.",
+        "zh": "现在走完整自动化：选题、写稿、质检并发布到 WordPress。"
+      }
+    }
+  ]
+}

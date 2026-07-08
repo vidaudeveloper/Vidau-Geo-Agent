@@ -32,7 +32,9 @@
 ### 安装顺序
 
 1. **连 MCP** — [developer 控制台](https://geo.vidau.ai/developer) 创建 API Key，配置 `https://geo.vidau.ai/mcp` + 请求头 `x-api-key`
-2. **装 Skills** — `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
+2. **装 Skills**
+   - **macOS / Linux / Git Bash：** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
+   - **Windows Hermes Desktop（PowerShell）：** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
 3. **直接对话** — 不必记工具名，Skill 会自动编排 MCP
 
 ### 8 个 Skill · 示例说法
@@ -77,7 +79,9 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 ### Setup order
 
 1. **Connect MCP** — Create API key at [developer console](https://geo.vidau.ai/developer); point to `https://geo.vidau.ai/mcp` with header `x-api-key`
-2. **Install Skills** — `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
+2. **Install Skills**
+   - **macOS / Linux / Git Bash:** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
+   - **Windows Hermes Desktop (PowerShell):** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
 3. **Talk naturally** — Skills orchestrate MCP; no need to memorize tool names
 
 ### 8 skills · example prompts

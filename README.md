@@ -63,16 +63,26 @@ Save and restart your agent (Hermes: `/reload-mcp` or restart).
 
 ### Step 2 — Install Skills
 
-**One command (Hermes):**
+**One command (Hermes — macOS / Linux / Git Bash):**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh | bash
+```
+
+**Windows Hermes Desktop (PowerShell):**
+
+```powershell
+irm https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1 | iex
 ```
 
 **Or install from geo.vidau.ai (same pack, production CDN):**
 
 ```bash
 curl -fsSL https://geo.vidau.ai/skills/install.sh | bash
+```
+
+```powershell
+irm https://geo.vidau.ai/skills/install.ps1 | iex
 ```
 
 **Manual install (any client that supports remote SKILL.md URLs):**
@@ -99,8 +109,16 @@ hermes skills install https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo
 
 ### 第 2 步 — 安装 Skills
 
+**macOS / Linux / Git Bash：**
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh | bash
+```
+
+**Windows Hermes Desktop（PowerShell）：**
+
+```powershell
+irm https://geo.vidau.ai/skills/install.ps1 | iex
 ```
 
 安装完成后重启 Agent，即可在对话中使用。

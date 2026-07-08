@@ -16,7 +16,8 @@
 
 - GitHub 仓库：https://github.com/vidaudeveloper/Vidau-Geo-Agent
 - Skill 清单（manifest）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/manifest.json
-- 一键安装脚本（Hermes）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh
+- 一键安装脚本（Hermes macOS/Linux）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh
+- 一键安装脚本（Hermes Windows）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1
 - MCP 端点：https://geo.vidau.ai/mcp（请求头 `x-api-key`）
 - 开发者控制台（创建 API Key）：https://geo.vidau.ai/developer
 
@@ -91,10 +92,16 @@ mcp_servers:
 
 Base URL：`https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main`
 
-**Hermes（优先）：**
+**Hermes（macOS/Linux/Git Bash）：**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh | bash
+```
+
+**Hermes Windows Desktop（PowerShell）：**
+
+```powershell
+irm https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1 | iex
 ```
 
 或逐个安装：
@@ -165,7 +172,8 @@ Please install VidAU GEO Agent Skills so I can run GEO audits, brand monitoring,
 
 - GitHub repo: https://github.com/vidaudeveloper/Vidau-Geo-Agent
 - Skill manifest: https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/manifest.json
-- One-shot installer (Hermes): https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh
+- One-shot installer (Hermes macOS/Linux): https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh
+- One-shot installer (Hermes Windows): https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1
 - MCP endpoint: https://geo.vidau.ai/mcp (header `x-api-key`)
 - Developer console (API key): https://geo.vidau.ai/developer
 
@@ -240,10 +248,16 @@ Save and restart the agent (Hermes: `/reload-mcp`).
 
 Base URL: `https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main`
 
-**Hermes (preferred):**
+**Hermes (macOS/Linux/Git Bash):**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh | bash
+```
+
+**Hermes Windows Desktop (PowerShell):**
+
+```powershell
+irm https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1 | iex
 ```
 
 Or install each skill:

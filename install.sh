@@ -6,7 +6,14 @@ set -euo pipefail
 REPO_BASE="${VIDAU_GEO_SKILLS_BASE:-https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main}"
 
 command -v hermes >/dev/null 2>&1 || {
-  echo "Hermes CLI not found. Install Hermes first: https://hermes-agent.nousresearch.com"
+  if [[ "${OS:-}" == "Windows_NT" || -n "${WINDIR:-}" ]]; then
+    echo "On Windows Hermes Desktop, use PowerShell (not curl | bash):"
+    echo "  irm https://geo.vidau.ai/skills/install.ps1 | iex"
+    echo ""
+    echo "If you use Git Bash, open a new terminal after installing Hermes so hermes is on PATH."
+  else
+    echo "Hermes CLI not found. Install Hermes first: https://hermes-agent.nousresearch.com"
+  fi
   exit 1
 }
 

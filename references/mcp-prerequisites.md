@@ -8,7 +8,9 @@ Skills are **orchestration only**. They do not call GEO APIs by themselves.
    - URL: `https://geo.vidau.ai/mcp`
    - Header: `x-api-key: <key from developer console>`
    - Create key at **https://geo.vidau.ai/developer**
-2. **Install Skills** — `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
+2. **Install Skills**
+   - macOS / Linux / Git Bash: `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
+   - Windows Hermes Desktop: `irm https://geo.vidau.ai/skills/install.ps1 | iex`
 
 ## When MCP is missing or broken
 

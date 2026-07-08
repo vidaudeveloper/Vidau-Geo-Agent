@@ -176,7 +176,7 @@ Each skill folder contains a `SKILL.md` with YAML frontmatter (name, description
 
 ---
 
-## MCP Tools (33)
+## MCP Tools (34)
 
 Skills orchestrate these MCP tools exposed at `https://geo.vidau.ai/mcp`:
 
@@ -184,7 +184,7 @@ Skills orchestrate these MCP tools exposed at `https://geo.vidau.ai/mcp`:
 |----------|-------|
 | **Audits** | `run_quick_audit`, `run_geo_audit` |
 | **Brand monitoring** | `list_brands`, `brand_overview`, `citations`, `opportunities`, `leaderboard`, `list_responses` |
-| **Content** | `compose_article`, `write_article`, `suggest_topic`, `generate_topic`, `score_article`, `optimize_article`, `list_article_templates` |
+| **Content** | `compose_article`, `write_article`, `suggest_topic`, `generate_topic`, `suggest_seo_keywords`, `score_article`, `optimize_article`, `list_article_templates` |
 | **Publish** | `list_connectors`, `publish_compose`, `publish_wordpress`, `publish_shopify` |
 | **Automation** | `run_content_automation`, `wait_for_content_automation_run`, `update_content_automation_settings`, `cancel_content_automation_run` |
 | **Analytics** | `keyword_volume`, `seo_traffic`, `query_fanout`, `generate_fanout` |

@@ -1,7 +1,7 @@
 ---
 name: vidau-geo-automation
 description: Run or schedule VidAU content automation — topic, compose, quality gate, WordPress/Shopify publish.
-version: 1.2.2
+version: 1.2.3
 metadata:
   hermes:
     tags: [geo, vidau, automation]
@@ -60,7 +60,7 @@ Then **ask again**.
 
 ### Daily schedule
 
-**`update_content_automation_settings(brand_id, enabled=True, schedule_hour=9, schedule_minute=0, schedule_timezone="Asia/Shanghai", publish_mode="draft")`**
+**`update_content_automation_settings(brand_id, enabled=True, schedule_hour=9, schedule_minute=0, schedule_timezone="Asia/Shanghai", publish_mode="draft", image_source="auto")`**
 
 Disable: `enabled=False`. Cancel in-flight: **`cancel_content_automation_run(run_id)`**.
 
@@ -68,11 +68,13 @@ Disable: `enabled=False`. Cancel in-flight: **`cancel_content_automation_run(run
 
 - `publish_mode`: `draft` (default) or `auto`
 - `article_template_id`: `simple`, `vidau-blue`, `vidau-pink`
+- `image_source`: `auto` (default — Pexels when configured), `pexels`, `none`, `both`
 - `daily_article_count`, `quality_threshold`, `default_connector_id`
 
 ## Pitfalls
 
 - MCP not connected → geo.vidau.ai/developer (see Step 0).
+- `image_source=auto` with no WordPress connector → article composes without hero images.
 
 ## Verification
 

@@ -1,7 +1,7 @@
 ---
 name: vidau-geo-compose
-description: Compose publish-ready GEO articles via VidAU MCP with smart defaults for language, tone, template, and SEO keywords.
-version: 1.2.2
+description: Compose publish-ready GEO articles via VidAU MCP with smart defaults for language, tone, template, SEO keywords, and hero images.
+version: 1.2.3
 metadata:
   hermes:
     tags: [geo, vidau, content, compose]
@@ -56,14 +56,22 @@ Then **ask again**.
    - User gave topic → use it.
    - No topic → **`suggest_topic(brand_id)`** (content opportunity).
    - Still none → **`generate_topic(brand_id)`**.
-3. **`compose_article`** with defaults unless user specified otherwise:
-   - `language=auto`, `tone=professional`, `template_id=simple`, `seo_keywords=[]`
-4. Tell user to preview/edit in **GEO console → Content Creation → My Articles** (`draftId` in response).
-5. Publish only if user asked — use **`vidau-geo-publish`** skill / `publish_compose`.
+3. **SEO keywords** (when topic is known)
+   - Call **`suggest_seo_keywords(brand_id, topic)`** → pass returned `keywords` to compose.
+   - User named keywords explicitly → use those instead.
+   - Else → `seo_keywords=[]` (server auto-matches from brand library).
+4. **`compose_article`** with defaults unless user specified otherwise:
+   - `language=auto`, `tone=professional`, `template_id=simple`
+   - `seo_keywords` from step 3
+   - `image_source=auto` for Pexels hero images when a WordPress connector exists; `none` if user says no images
+5. Tell user to preview/edit in **GEO console → Content Creation → My Articles** (`draftId` in response).
+6. Publish only if user asked — use **`vidau-geo-publish`** skill / `publish_compose`.
 
 ## Parameters
 
 For full parameter matrix load: `skill_view("vidau-geo-compose", "references/compose-params.md")`.
+
+For SEO keyword recommendation prompt signals load: `skill_view("vidau-geo-compose", "references/seo-keyword-recommend.md")`.
 
 Optional: **`list_article_templates`** when user asks which HTML templates exist.
 
@@ -74,6 +82,7 @@ Optional: **`list_article_templates`** when user asks which HTML templates exist
 | `missing_brand_words` | User must configure brand words in GEO keyword library |
 | `missing_seo_keywords` | User must configure SEO keywords in GEO keyword library |
 | `insufficient_credits` | User needs credits at geo.vidau.ai |
+| `imagesSkippedReason=no_connector` | Pexels images need a WordPress connector; article still saved |
 | MCP not connected / no API key / 401 | User must connect MCP at geo.vidau.ai/developer (see Step 0) |
 
 Do **not** use `write_article` unless user explicitly wants markdown-only without meta/schema.

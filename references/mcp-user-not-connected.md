@@ -13,7 +13,7 @@ Use **only** this message (pick 中文 or English). Do not answer the original r
 
 **请完成下面步骤（约 2 分钟）：**
 
-1. 在 VidAU Agent / Hermes 的 MCP 配置中添加：
+1. 在 MCP 配置中添加：
 
 ```yaml
 mcp_servers:
@@ -26,8 +26,6 @@ mcp_servers:
 
 2. 保存后执行 `/reload-mcp`（或重启），再**说一次**刚才的需求。
 
-> 说明：Skill 是使用说明；**MCP 才是真正调用 VidAU 能力的连接**。VidAU Agent 会自动带上登录用户身份，**不需要** `x-api-key`。
-
 ---
 
 ## English
@@ -36,7 +34,7 @@ You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I 
 
 **Please complete these steps (~2 minutes):**
 
-1. Add this to VidAU Agent / Hermes MCP config:
+1. Add this to MCP config:
 
 ```yaml
 mcp_servers:
@@ -49,11 +47,9 @@ mcp_servers:
 
 2. Save, run `/reload-mcp` (or restart), then **ask again**.
 
-> Note: Skills are instructions only; **MCP is the live connection**. VidAU Agent injects your logged-in user id — **no** `x-api-key` needed.
-
 ---
 
 ## If MCP is connected but calls fail
 
-- **401 / auth failed** → confirm the `vidau-geo` block above; for Cursor/Claude use `x-api-key` from geo.vidau.ai/developer  
+- **401 / auth failed** → confirm the `vidau-geo` block above, then `/reload-mcp`
 - **402 / credits** → add credits at geo.vidau.ai

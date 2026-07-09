@@ -46,8 +46,6 @@ mcp_servers:
 
 完成后请**再说一次**您的需求。
 
-> Skill 是使用说明；**MCP 才是真正调用 VidAU 的连接**。VidAU Agent 用登录用户身份鉴权，**不需要** `x-api-key`。
-
 ### User message — English
 
 You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I cannot fetch metrics, write articles, or run audits.
@@ -64,8 +62,6 @@ mcp_servers:
 ```
 
 Then **ask again**.
-
-> Skills are instructions; **MCP is the live connection**. VidAU Agent authenticates via logged-in user id — **no** `x-api-key`.
 
 ## Verification
 

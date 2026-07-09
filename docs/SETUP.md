@@ -2,9 +2,7 @@
 
 Please complete the full GEO Agent setup in the following order:
 
-1. **MCP**: Check whether `vidau-geo` is already connected and working. If not, configure the MCP server `vidau-geo` to point to `https://geo.vidau.ai/mcp`. Reload MCP and verify the connection is healthy.
-
-   **VidAU Agent / Hermes Desktop** (`~/.hermes/config.yaml`) — no `x-api-key`; desktop injects `vidau_user_id`:
+1. **MCP**: Check whether `vidau-geo` is already connected and working. If not, add this to `~/.hermes/config.yaml`:
 
    ```yaml
    mcp_servers:
@@ -15,7 +13,7 @@ Please complete the full GEO Agent setup in the following order:
        timeout: 300
    ```
 
-   **Cursor / Claude Desktop** — create an API key at [geo.vidau.ai/developer](https://geo.vidau.ai/developer), then use `x-api-key` in MCP headers.
+   Reload MCP and verify the connection is healthy.
 
 2. **Skills**: Install **all** Skills from `https://github.com/vidaudeveloper/Vidau-Geo-Agent` (branch `main`). **Do not** use `raw.githubusercontent.com` URLs — they often return HTTP 429. The skill list is defined in `manifest.json` — never hardcode skill names.
 

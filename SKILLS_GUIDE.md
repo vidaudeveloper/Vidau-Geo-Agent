@@ -33,7 +33,7 @@
 
 完整一键安装提示词见 **[docs/SETUP.md](./docs/SETUP.md)**（MCP → Skills → `/reset`）。
 
-1. **连 MCP** — VidAU Agent / Hermes：写入 `vidau-geo` YAML（无需 API Key）；Cursor / Claude：在 [developer](https://geo.vidau.ai/developer) 创建 Key
+1. **连 MCP** — 写入下方 `vidau-geo` YAML
 2. **装 Skills**
    - **推荐：** `git clone` + `node scripts/install-skills.mjs --force`（不要用 raw.githubusercontent.com）
    - **macOS / Linux / Git Bash：** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
@@ -83,7 +83,7 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 
 See **[docs/SETUP.md](./docs/SETUP.md)** for the full one-click prompt (MCP → Skills → `/reset`).
 
-1. **Connect MCP** — VidAU Agent / Hermes: add `vidau-geo` YAML (no API key); Cursor / Claude: create a key at [developer](https://geo.vidau.ai/developer)
+1. **Connect MCP** — add the `vidau-geo` YAML below
 2. **Install Skills** — prefer `git clone` + `node scripts/install-skills.mjs --force` (avoid raw.githubusercontent.com)
    - **macOS / Linux / Git Bash:** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
    - **Windows Hermes Desktop (PowerShell):** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
@@ -115,22 +115,7 @@ See **[docs/SETUP.md](./docs/SETUP.md)** for the full one-click prompt (MCP → 
 
 ---
 
-## MCP config snippets
-
-**Cursor / Claude Desktop**
-
-```json
-{
-  "mcpServers": {
-    "vidau-geo": {
-      "url": "https://geo.vidau.ai/mcp",
-      "headers": { "x-api-key": "geo_xxx" }
-    }
-  }
-}
-```
-
-**VidAU Agent / Hermes** (`~/.hermes/config.yaml`) — no `x-api-key`:
+## MCP config
 
 ```yaml
 mcp_servers:

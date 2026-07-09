@@ -23,27 +23,35 @@ metadata:
 
 您已经安装了 VidAU Skill，但还**没有连接 vidau-geo MCP**，所以我暂时无法帮您完成这个请求。
 
-请按下面 2 步操作（约 2 分钟）：
-1. 打开 **https://geo.vidau.ai/developer** → 创建 **API Key** → 复制 **Hermes MCP 配置（YAML）**
-2. 按照 **https://geo.vidau.ai/developer** 页面上的 Hermes 指引完成 MCP 连接并保存  
-   （地址 `https://geo.vidau.ai/mcp`，请求头 `x-api-key`）
+请在 MCP 配置中添加：
 
-完成后请**再说一次**您的需求。
+```yaml
+mcp_servers:
+  vidau-geo:
+    url: https://geo.vidau.ai/mcp
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
+```
 
-> Skill 是使用说明；**MCP 才是真正连接 VidAU 能力**。只装 Skill、不连 MCP **无法使用**。
+保存后执行 `/reload-mcp`（或重启），再**说一次**您的需求。
 
 ### English (only when MCP is NOT connected)
 
 You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I can't complete this request yet.
 
-Please do these 2 steps (~2 minutes):
-1. Open **https://geo.vidau.ai/developer** → create an **API key** → copy the **Hermes MCP config (YAML)**
-2. Follow the Hermes setup guide on **https://geo.vidau.ai/developer** to connect MCP and save  
-   (URL `https://geo.vidau.ai/mcp`, header `x-api-key`)
+Add this to MCP config:
 
-Then **ask again**.
+```yaml
+mcp_servers:
+  vidau-geo:
+    url: https://geo.vidau.ai/mcp
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
+```
 
-> Skills are instructions only; **MCP is the live connection**. Skills without MCP **do not work**.
+Save, run `/reload-mcp` (or restart), then **ask again**.
 ## When to Use
 
 - User asks about **their brand's** performance: visibility, citation rate, SOV, sentiment, or "overview" style metrics.

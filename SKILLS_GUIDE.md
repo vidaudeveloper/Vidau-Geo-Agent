@@ -31,7 +31,7 @@
 
 ### 安装顺序
 
-1. **连 MCP** — [developer 控制台](https://geo.vidau.ai/developer) 创建 API Key，配置 `https://geo.vidau.ai/mcp` + 请求头 `x-api-key`
+1. **连 MCP** — VidAU Agent / Hermes：写入 `vidau-geo` YAML（无需 API Key）；Cursor / Claude：在 [developer](https://geo.vidau.ai/developer) 创建 Key
 2. **装 Skills**
    - **macOS / Linux / Git Bash：** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
    - **Windows Hermes Desktop（PowerShell）：** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
@@ -78,7 +78,7 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 
 ### Setup order
 
-1. **Connect MCP** — Create API key at [developer console](https://geo.vidau.ai/developer); point to `https://geo.vidau.ai/mcp` with header `x-api-key`
+1. **Connect MCP** — VidAU Agent / Hermes: add `vidau-geo` YAML (no API key); Cursor / Claude: create a key at [developer](https://geo.vidau.ai/developer)
 2. **Install Skills**
    - **macOS / Linux / Git Bash:** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
    - **Windows Hermes Desktop (PowerShell):** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
@@ -125,14 +125,15 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 }
 ```
 
-**Hermes** (`~/.hermes/config.yaml`)
+**VidAU Agent / Hermes** (`~/.hermes/config.yaml`) — no `x-api-key`:
 
 ```yaml
 mcp_servers:
   vidau-geo:
     url: https://geo.vidau.ai/mcp
-    headers:
-      x-api-key: geo_xxx
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
 ```
 
 ---

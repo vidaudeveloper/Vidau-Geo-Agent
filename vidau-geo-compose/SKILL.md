@@ -16,8 +16,8 @@ metadata:
 
 | Result | What to do |
 |--------|------------|
-| **YES** — VidAU MCP tools are available and calls succeed (e.g. `list_brands`, `run_quick_audit`, `compose_article`) | **Skip this entire Step 0.** Do **not** mention MCP setup or geo.vidau.ai/developer. Go straight to **When to Use / Procedure** below and run the skill normally. |
-| **NO** — no VidAU tools in your tool list, or calls fail with **401** / invalid API key | **Stop.** Your **entire reply** = **only** the user message below (pick 中文 or English). Do **not** answer the original request. Do **not** invent audits, metrics, or articles. See `references/mcp-user-not-connected.md`. |
+| **YES** — VidAU MCP tools are available and calls succeed (e.g. `list_brands`, `run_quick_audit`, `compose_article`) | **Skip this entire Step 0.** Do **not** mention MCP setup. Go straight to **When to Use / Procedure** below and run the skill normally. |
+| **NO** — no VidAU tools in your tool list, or calls fail with **401** | **Stop.** Your **entire reply** = **only** the user message below (pick 中文 or English). Do **not** answer the original request. Do **not** invent audits, metrics, or articles. See `references/mcp-user-not-connected.md`. |
 
 ### 中文（仅 MCP 未连接时发给用户）
 
@@ -83,7 +83,7 @@ Optional: **`list_article_templates`** when user asks which HTML templates exist
 | `missing_seo_keywords` | User must configure SEO keywords in GEO keyword library |
 | `insufficient_credits` | User needs credits at geo.vidau.ai |
 | `imagesSkippedReason=no_connector` | Pexels images need a WordPress connector; article still saved |
-| MCP not connected / no API key / 401 | User must connect MCP at geo.vidau.ai/developer (see Step 0) |
+| MCP not connected / no API key / 401 | User must connect MCP with Step 0 YAML (see Step 0) |
 
 Do **not** use `write_article` unless user explicitly wants markdown-only without meta/schema.
 

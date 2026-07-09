@@ -11,18 +11,22 @@ Use **only** this message (pick 中文 or English). Do not answer the original r
 
 您已经安装了 VidAU Skill，但还**没有连接 vidau-geo MCP**，所以我暂时无法帮您查询数据、写稿或做审计。
 
-**请完成下面 2 步（约 2 分钟）：**
+**请完成下面步骤（约 2 分钟）：**
 
-1. 打开 **https://geo.vidau.ai/developer**
-   - 创建 **API Key**
-   - 复制页面上的 **Hermes MCP 配置（YAML）**
-2. 按照 **https://geo.vidau.ai/developer** 页面上的 Hermes 指引完成 MCP 连接并保存  
-   - 地址：`https://geo.vidau.ai/mcp`  
-   - 需要请求头：`x-api-key`（您的 Key）
+1. 在 VidAU Agent / Hermes 的 MCP 配置中添加：
 
-完成后请**再说一次**刚才的需求，我就可以通过 MCP 为您执行。
+```yaml
+mcp_servers:
+  vidau-geo:
+    url: https://geo.vidau.ai/mcp
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
+```
 
-> 说明：Skill 是使用说明；**MCP 才是真正调用 VidAU 能力的连接**。只装 Skill、不连 MCP 无法工作。
+2. 保存后执行 `/reload-mcp`（或重启），再**说一次**刚才的需求。
+
+> 说明：Skill 是使用说明；**MCP 才是真正调用 VidAU 能力的连接**。VidAU Agent 会自动带上登录用户身份，**不需要** `x-api-key`。
 
 ---
 
@@ -30,22 +34,26 @@ Use **only** this message (pick 中文 or English). Do not answer the original r
 
 You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I cannot fetch metrics, write articles, or run audits for you.
 
-**Please complete these 2 steps (~2 minutes):**
+**Please complete these steps (~2 minutes):**
 
-1. Open **https://geo.vidau.ai/developer**
-   - Create an **API key**
-   - Copy the **Hermes MCP config (YAML)** from that page
-2. Follow the Hermes setup guide on **https://geo.vidau.ai/developer** to connect MCP and save  
-   - URL: `https://geo.vidau.ai/mcp`  
-   - Header: `x-api-key` (your key)
+1. Add this to VidAU Agent / Hermes MCP config:
 
-Then **ask again** — I will run your request through MCP.
+```yaml
+mcp_servers:
+  vidau-geo:
+    url: https://geo.vidau.ai/mcp
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
+```
 
-> Note: Skills are instructions only; **MCP is the live connection** to VidAU. Skills without MCP cannot work.
+2. Save, run `/reload-mcp` (or restart), then **ask again**.
+
+> Note: Skills are instructions only; **MCP is the live connection**. VidAU Agent injects your logged-in user id — **no** `x-api-key` needed.
 
 ---
 
 ## If MCP is connected but calls fail
 
-- **401 / invalid key** → same steps: new key at geo.vidau.ai/developer, update MCP connection per the developer guide  
+- **401 / auth failed** → confirm the `vidau-geo` block above; for Cursor/Claude use `x-api-key` from geo.vidau.ai/developer  
 - **402 / credits** → add credits at geo.vidau.ai

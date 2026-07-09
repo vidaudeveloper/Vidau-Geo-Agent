@@ -1,5 +1,5 @@
 {
-  "version": "1.1.4",
+  "version": "1.1.5",
   "package": "vidau-geo-skills",
   "publisher": "VidAU GEO Agent",
   "baseUrl": "https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main",
@@ -9,7 +9,7 @@
       "id": "vidau-geo-mcp-setup",
       "path": "vidau-geo-mcp-setup",
       "name": "vidau-geo-mcp-setup",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "title": {
         "en": "Connect MCP first",
         "zh": "先连接 MCP"

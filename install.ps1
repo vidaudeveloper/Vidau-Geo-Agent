@@ -104,27 +104,20 @@ Write-Host ''
 Write-Host 'Skills do not connect to VidAU. Without MCP you cannot'
 Write-Host 'query data, write articles, or run audits.'
 Write-Host ''
-Write-Host '1. Open https://geo.vidau.ai/developer and create an API Key'
-Write-Host '2. Connect MCP (pick one):'
+Write-Host 'VidAU Agent / Hermes Desktop — add to config.yaml'
+Write-Host "(no x-api-key; desktop injects vidau_user_id):"
 Write-Host ''
-Write-Host '   hermes mcp add vidau-geo --url https://geo.vidau.ai/mcp --header "x-api-key=YOUR_KEY"'
+Write-Host 'mcp_servers:'
+Write-Host '  vidau-geo:'
+Write-Host '    url: https://geo.vidau.ai/mcp'
+Write-Host '    enabled: true'
+Write-Host '    connect_timeout: 60'
+Write-Host '    timeout: 300'
 Write-Host ''
-Write-Host '   Or edit config.yaml in Hermes Desktop → Settings:'
-Write-Host "     $(Join-Path (Get-HermesHome) 'config.yaml')"
+Write-Host "Config file: $(Join-Path (Get-HermesHome) 'config.yaml')"
+Write-Host 'Then: /reload-mcp or restart Hermes.'
 Write-Host ''
-
-$apiKey = Read-Host 'Paste API Key to configure now (Enter to skip)'
-if ($apiKey) {
-    Invoke-Hermes -Args @(
-        'mcp', 'add', 'vidau-geo',
-        '--url', 'https://geo.vidau.ai/mcp',
-        '--header', "x-api-key=$apiKey"
-    )
-    Write-Host ''
-    Write-Host 'MCP configured. Restart Hermes or /reload-mcp, then /reset.' -ForegroundColor Green
-    exit 0
-}
-
-Write-Host 'Skipped MCP setup. Configure later at https://geo.vidau.ai/developer'
-Write-Host 'Then: restart Hermes or /reload-mcp'
+Write-Host 'Cursor / Claude Desktop still need an API key from'
+Write-Host 'https://geo.vidau.ai/developer (x-api-key header).'
+Write-Host ''
 exit 1

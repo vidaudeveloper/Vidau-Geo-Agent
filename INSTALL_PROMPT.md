@@ -2,8 +2,8 @@
 
 把下面 **「中文版」** 或 **「English」** 整段复制，粘贴到 Cursor / Hermes / Claude Desktop 等 AI Agent 的对话里发送即可。Agent 会按步骤完成 MCP 连接与 Skills 安装。
 
-> 仓库：<https://github.com/vidaudeveloper/Vidau-Geo-Agent>  
-> Skill 清单：<https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/manifest.json>
+> MCP 端点：<https://geo.vidau.ai/mcp>（VidAU Agent 用登录用户身份；Cursor/Claude 用 `x-api-key`）  
+> Skill 清单：<https://geo.vidau.ai/skills/manifest.json>
 
 ---
 
@@ -15,15 +15,14 @@
 ## 资源
 
 - GitHub 仓库：https://github.com/vidaudeveloper/Vidau-Geo-Agent
-- Skill 清单（manifest）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/manifest.json
-- 一键安装脚本（Hermes macOS/Linux）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh
-- 一键安装脚本（Hermes Windows）：https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1
-- MCP 端点：https://geo.vidau.ai/mcp（请求头 `x-api-key`）
-- 开发者控制台（创建 API Key）：https://geo.vidau.ai/developer
+- Skill 清单（CDN）：https://geo.vidau.ai/skills/manifest.json
+- 一键安装脚本：https://geo.vidau.ai/skills/install.sh （Windows：install.ps1）
+- MCP 端点：https://geo.vidau.ai/mcp
+- 说明：VidAU Agent / Hermes **不需要** `x-api-key`；Cursor / Claude Desktop 才需要在 https://geo.vidau.ai/developer 创建 Key
 
 ## 你要做的事
 
-按顺序执行，每步完成后简要汇报；遇到需要我手动操作的步骤（如创建 API Key），先停下来等我提供。
+按顺序执行，每步完成后简要汇报；遇到需要我手动操作的步骤，先停下来等我确认。
 
 ### 1. 确认运行环境
 
@@ -38,40 +37,20 @@
 
 ### 2. 连接 vidau-geo MCP（必须）
 
-如果还没有 API Key，请提示我：
+根据环境配置 MCP：
 
-1. 打开 https://geo.vidau.ai/developer
-2. 创建 API Key（格式 `geo_xxx`）
-3. 把 Key 发给你（或自行写入配置文件，需我确认）
-
-然后配置 MCP：
-
-**Hermes** — 编辑 `~/.hermes/config.yaml`：
+**VidAU Agent / Hermes Desktop** — 编辑 `~/.hermes/config.yaml`（桌面端用登录用户身份，**不要**写 `x-api-key`）：
 
 ```yaml
 mcp_servers:
   vidau-geo:
     url: https://geo.vidau.ai/mcp
-    headers:
-      x-api-key: <我的 API Key>
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
 ```
 
-**Cursor** — 在项目或用户 MCP 配置中添加：
-
-```json
-{
-  "mcpServers": {
-    "vidau-geo": {
-      "url": "https://geo.vidau.ai/mcp",
-      "headers": {
-        "x-api-key": "<我的 API Key>"
-      }
-    }
-  }
-}
-```
-
-**Claude Desktop** — 编辑 `%APPDATA%\Claude\claude_desktop_config.json`（macOS：`~/Library/Application Support/Claude/`）：
+**Cursor / Claude Desktop** — 先打开 https://geo.vidau.ai/developer 创建 API Key（`geo_xxx`），再写入配置：
 
 ```json
 {
@@ -171,15 +150,14 @@ Please install VidAU GEO Agent Skills so I can run GEO audits, brand monitoring,
 ## Resources
 
 - GitHub repo: https://github.com/vidaudeveloper/Vidau-Geo-Agent
-- Skill manifest: https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/manifest.json
-- One-shot installer (Hermes macOS/Linux): https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh
-- One-shot installer (Hermes Windows): https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1
-- MCP endpoint: https://geo.vidau.ai/mcp (header `x-api-key`)
-- Developer console (API key): https://geo.vidau.ai/developer
+- Skill manifest (CDN): https://geo.vidau.ai/skills/manifest.json
+- One-shot installer: https://geo.vidau.ai/skills/install.sh (Windows: install.ps1)
+- MCP endpoint: https://geo.vidau.ai/mcp
+- Note: VidAU Agent / Hermes needs **no** `x-api-key`; Cursor / Claude Desktop need a key from https://geo.vidau.ai/developer
 
 ## Your tasks
 
-Execute in order and report briefly after each step. Stop and ask me when manual action is required (e.g. creating an API key).
+Execute in order and report briefly after each step. Stop and ask me when manual action is required.
 
 ### 1. Detect client environment
 
@@ -194,40 +172,20 @@ Pick the matching MCP and Skills install path.
 
 ### 2. Connect vidau-geo MCP (required)
 
-If I have no API key yet, tell me to:
+Configure MCP for the current client:
 
-1. Open https://geo.vidau.ai/developer
-2. Create an API key (`geo_xxx`)
-3. Send you the key (or confirm before you write config files)
-
-Then configure MCP:
-
-**Hermes** — `~/.hermes/config.yaml`:
+**VidAU Agent / Hermes Desktop** — `~/.hermes/config.yaml` (desktop injects logged-in user id; **do not** set `x-api-key`):
 
 ```yaml
 mcp_servers:
   vidau-geo:
     url: https://geo.vidau.ai/mcp
-    headers:
-      x-api-key: <MY_API_KEY>
+    enabled: true
+    connect_timeout: 60
+    timeout: 300
 ```
 
-**Cursor** — user or project MCP config:
-
-```json
-{
-  "mcpServers": {
-    "vidau-geo": {
-      "url": "https://geo.vidau.ai/mcp",
-      "headers": {
-        "x-api-key": "<MY_API_KEY>"
-      }
-    }
-  }
-}
-```
-
-**Claude Desktop** — `%APPDATA%\Claude\claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/`):
+**Cursor / Claude Desktop** — create an API key at https://geo.vidau.ai/developer (`geo_xxx`), then:
 
 ```json
 {
@@ -309,7 +267,7 @@ Restart the agent when done (Hermes: `/reset`).
 | Publish | Publish the article to WordPress as a draft |
 | Automation | Run the full automation pipeline now |
 
-Start the installation now and ask me for the API key when needed.
+Start the installation now. For VidAU Agent / Hermes, write the YAML above (no API key). For Cursor / Claude, ask me for an API key when needed.
 ```
 
 ---
@@ -321,5 +279,5 @@ Start the installation now and ask me for the API key when needed.
 | Skills 数量 | 8 个（见 `manifest.json`） |
 | MCP 与 Skills 关系 | Skills 是编排说明；MCP 是 API 连接。**两者都必须安装** |
 | Skill 安装 | 公开，无需 API Key |
-| MCP 调用 | 需要有效 `x-api-key` 和账户积分 |
+| MCP 调用 | VidAU Agent：登录用户身份；其他客户端：`x-api-key` + 账户积分 |
 | 生产 CDN 备选 | `curl -fsSL https://geo.vidau.ai/skills/install.sh \| bash` |

@@ -57,31 +57,19 @@ echo ""
 echo "Skills do not connect to VidAU. Without MCP you cannot"
 echo "query data, write articles, or run audits."
 echo ""
-echo "1. Open https://geo.vidau.ai/developer and create an API Key"
-echo "2. Connect MCP (pick one):"
+echo "VidAU Agent / Hermes Desktop — add to ~/.hermes/config.yaml"
+echo "(no x-api-key; desktop injects vidau_user_id):"
 echo ""
-echo "   hermes mcp add vidau-geo \\"
-echo "     --url https://geo.vidau.ai/mcp \\"
-echo "     --header \"x-api-key=YOUR_KEY\""
+echo "mcp_servers:"
+echo "  vidau-geo:"
+echo "    url: https://geo.vidau.ai/mcp"
+echo "    enabled: true"
+echo "    connect_timeout: 60"
+echo "    timeout: 300"
 echo ""
-echo "   Or paste the YAML from the developer page into Hermes config."
+echo "Then: /reload-mcp or restart Hermes."
 echo ""
-
-api_key=""
-if [ -r /dev/tty ]; then
-  printf "Paste API Key to configure now (Enter to skip): " > /dev/tty
-  IFS= read -r api_key < /dev/tty || true
-fi
-
-if [ -n "${api_key}" ]; then
-  hermes mcp add vidau-geo \
-    --url "https://geo.vidau.ai/mcp" \
-    --header "x-api-key=${api_key}"
-  echo ""
-  echo "MCP configured. Restart Hermes or /reload-mcp, then /reset."
-  exit 0
-fi
-
-echo "Skipped MCP setup. Configure later at https://geo.vidau.ai/developer"
-echo "Then: restart Hermes or /reload-mcp"
+echo "Cursor / Claude Desktop still need an API key from"
+echo "https://geo.vidau.ai/developer (x-api-key header)."
+echo ""
 exit 1

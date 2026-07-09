@@ -32,13 +32,13 @@ VidAU GEO Agent Skills 是一套面向 AI Agent 的 **GEO（生成式引擎优�
 
 ### Step 1 — Connect MCP (required)
 
-Create an API key at **[geo.vidau.ai/developer](https://geo.vidau.ai/developer)**, then add the VidAU GEO Agent MCP server:
+Create an API key at **[geo.vidau.ai/developer](https://geo.vidau.ai/developer)**, then add the vidau-geo MCP server:
 
 **Hermes** (`~/.hermes/config.yaml`):
 
 ```yaml
 mcp_servers:
-  VidAU GEO Agent:
+  vidau-geo:
     url: https://geo.vidau.ai/mcp
     headers:
       x-api-key: geo_xxx
@@ -49,7 +49,7 @@ mcp_servers:
 ```json
 {
   "mcpServers": {
-    "VidAU GEO Agent": {
+    "vidau-geo": {
       "url": "https://geo.vidau.ai/mcp",
       "headers": {
         "x-api-key": "geo_xxx"
@@ -148,7 +148,7 @@ Manifest: [`manifest.json`](manifest.json)
 ┌─────────────────────────────────────────────────────────┐
 │  AI Agent (Hermes / Cursor / Claude Desktop)            │
 │  ┌──────────────┐    ┌──────────────────────────────┐   │
-│  │ Skills       │    │ MCP: VidAU GEO Agent         │   │
+│  │ Skills       │    │ MCP: vidau-geo               │   │
 │  │ (this repo)  │───▶│ https://geo.vidau.ai/mcp     │   │
 │  │ orchestration│    │ x-api-key: geo_xxx           │   │
 │  └──────────────┘    └──────────────┬───────────────┘   │

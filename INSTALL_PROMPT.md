@@ -36,7 +36,7 @@
 
 根据环境选择对应的 MCP 与 Skills 安装方式。
 
-### 2. 连接 VidAU GEO Agent MCP（必须）
+### 2. 连接 vidau-geo MCP（必须）
 
 如果还没有 API Key，请提示我：
 
@@ -50,7 +50,7 @@
 
 ```yaml
 mcp_servers:
-  VidAU GEO Agent:
+  vidau-geo:
     url: https://geo.vidau.ai/mcp
     headers:
       x-api-key: <我的 API Key>
@@ -61,7 +61,7 @@ mcp_servers:
 ```json
 {
   "mcpServers": {
-    "VidAU GEO Agent": {
+    "vidau-geo": {
       "url": "https://geo.vidau.ai/mcp",
       "headers": {
         "x-api-key": "<我的 API Key>"
@@ -76,7 +76,7 @@ mcp_servers:
 ```json
 {
   "mcpServers": {
-    "VidAU GEO Agent": {
+    "vidau-geo": {
       "url": "https://geo.vidau.ai/mcp",
       "headers": {
         "x-api-key": "<我的 API Key>"
@@ -192,7 +192,7 @@ Identify which agent client I use:
 
 Pick the matching MCP and Skills install path.
 
-### 2. Connect VidAU GEO Agent MCP (required)
+### 2. Connect vidau-geo MCP (required)
 
 If I have no API key yet, tell me to:
 
@@ -206,7 +206,7 @@ Then configure MCP:
 
 ```yaml
 mcp_servers:
-  VidAU GEO Agent:
+  vidau-geo:
     url: https://geo.vidau.ai/mcp
     headers:
       x-api-key: <MY_API_KEY>
@@ -217,7 +217,7 @@ mcp_servers:
 ```json
 {
   "mcpServers": {
-    "VidAU GEO Agent": {
+    "vidau-geo": {
       "url": "https://geo.vidau.ai/mcp",
       "headers": {
         "x-api-key": "<MY_API_KEY>"
@@ -232,7 +232,7 @@ mcp_servers:
 ```json
 {
   "mcpServers": {
-    "VidAU GEO Agent": {
+    "vidau-geo": {
       "url": "https://geo.vidau.ai/mcp",
       "headers": {
         "x-api-key": "<MY_API_KEY>"

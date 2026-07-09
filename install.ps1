@@ -67,7 +67,7 @@ function Test-VidauMcpConfigured {
     if ($cli) {
         try {
             $out = & $cli mcp list 2>$null | Out-String
-            if ($out -match 'geo\.vidau\.ai|VidAU GEO') { return $true }
+            if ($out -match 'geo\.vidau\.ai|vidau-geo|VidAU GEO') { return $true }
         } catch {
             # fall through to config.yaml check
         }
@@ -107,7 +107,7 @@ Write-Host ''
 Write-Host '1. Open https://geo.vidau.ai/developer and create an API Key'
 Write-Host '2. Connect MCP (pick one):'
 Write-Host ''
-Write-Host '   hermes mcp add "VidAU GEO Agent" --url https://geo.vidau.ai/mcp --header "x-api-key=YOUR_KEY"'
+Write-Host '   hermes mcp add vidau-geo --url https://geo.vidau.ai/mcp --header "x-api-key=YOUR_KEY"'
 Write-Host ''
 Write-Host '   Or edit config.yaml in Hermes Desktop → Settings:'
 Write-Host "     $(Join-Path (Get-HermesHome) 'config.yaml')"
@@ -116,7 +116,7 @@ Write-Host ''
 $apiKey = Read-Host 'Paste API Key to configure now (Enter to skip)'
 if ($apiKey) {
     Invoke-Hermes -Args @(
-        'mcp', 'add', 'VidAU GEO Agent',
+        'mcp', 'add', 'vidau-geo',
         '--url', 'https://geo.vidau.ai/mcp',
         '--header', "x-api-key=$apiKey"
     )

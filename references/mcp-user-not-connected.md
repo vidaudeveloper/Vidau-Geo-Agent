@@ -9,7 +9,7 @@ Use **only** this message (pick 中文 or English). Do not answer the original r
 
 ## 中文
 
-您已经安装了 VidAU Skill，但还**没有连接 VidAU GEO Agent MCP**，所以我暂时无法帮您查询数据、写稿或做审计。
+您已经安装了 VidAU Skill，但还**没有连接 vidau-geo MCP**，所以我暂时无法帮您查询数据、写稿或做审计。
 
 **请完成下面 2 步（约 2 分钟）：**
 
@@ -28,7 +28,7 @@ Use **only** this message (pick 中文 or English). Do not answer the original r
 
 ## English
 
-You installed the VidAU Skill, but **VidAU GEO Agent MCP is not connected yet**, so I cannot fetch metrics, write articles, or run audits for you.
+You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I cannot fetch metrics, write articles, or run audits for you.
 
 **Please complete these 2 steps (~2 minutes):**
 

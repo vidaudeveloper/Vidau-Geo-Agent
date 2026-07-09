@@ -12,7 +12,7 @@ metadata:
 
 ## Step 0 — MCP check (only prompt when NOT connected)
 
-**Check first:** Is **VidAU GEO Agent MCP** already connected and working?
+**Check first:** Is **vidau-geo MCP** already connected and working?
 
 | Result | What to do |
 |--------|------------|
@@ -21,7 +21,7 @@ metadata:
 
 ### 中文（仅 MCP 未连接时发给用户）
 
-您已经安装了 VidAU Skill，但还**没有连接 VidAU GEO Agent MCP**，所以我暂时无法帮您完成这个请求。
+您已经安装了 VidAU Skill，但还**没有连接 vidau-geo MCP**，所以我暂时无法帮您完成这个请求。
 
 请按下面 2 步操作（约 2 分钟）：
 1. 打开 **https://geo.vidau.ai/developer** → 创建 **API Key** → 复制 **Hermes MCP 配置（YAML）**
@@ -34,7 +34,7 @@ metadata:
 
 ### English (only when MCP is NOT connected)
 
-You installed the VidAU Skill, but **VidAU GEO Agent MCP is not connected yet**, so I can't complete this request yet.
+You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I can't complete this request yet.
 
 Please do these 2 steps (~2 minutes):
 1. Open **https://geo.vidau.ai/developer** → create an **API key** → copy the **Hermes MCP config (YAML)**

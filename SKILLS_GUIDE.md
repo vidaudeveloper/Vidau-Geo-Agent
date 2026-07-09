@@ -117,7 +117,7 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 ```json
 {
   "mcpServers": {
-    "VidAU GEO Agent": {
+    "vidau-geo": {
       "url": "https://geo.vidau.ai/mcp",
       "headers": { "x-api-key": "geo_xxx" }
     }
@@ -129,7 +129,7 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 
 ```yaml
 mcp_servers:
-  VidAU GEO Agent:
+  vidau-geo:
     url: https://geo.vidau.ai/mcp
     headers:
       x-api-key: geo_xxx

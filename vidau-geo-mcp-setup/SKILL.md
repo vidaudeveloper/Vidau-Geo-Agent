@@ -13,7 +13,7 @@ metadata:
 ## When to Use
 
 - **Only when MCP is missing:** User tries audit, brand metrics, write article, publish, or automation but VidAU MCP tools are not available or return 401.
-- User only installed Skills (`hermes skills install …`) without connecting VidAU GEO Agent MCP.
+- User only installed Skills (`hermes skills install …`) without connecting vidau-geo MCP.
 
 ## Do NOT Use
 
@@ -21,7 +21,7 @@ metadata:
 
 ## Step 0 — MCP gate
 
-**Check first:** Can you call VidAU tools from MCP server `VidAU GEO Agent` / `geo.vidau.ai`?  
+**Check first:** Can you call VidAU tools from MCP server `vidau-geo` / `geo.vidau.ai`?  
 Examples: `list_brands`, `brand_overview`, `run_quick_audit`, `compose_article`.
 
 | Result | Action |
@@ -31,7 +31,7 @@ Examples: `list_brands`, `brand_overview`, `run_quick_audit`, `compose_article`.
 
 ### User message — 中文
 
-您已经安装了 VidAU Skill，但还**没有连接 VidAU GEO Agent MCP**，所以我暂时无法帮您查询数据、写稿或做审计。
+您已经安装了 VidAU Skill，但还**没有连接 vidau-geo MCP**，所以我暂时无法帮您查询数据、写稿或做审计。
 
 **请完成下面 2 步（约 2 分钟）：**
 
@@ -44,7 +44,7 @@ Examples: `list_brands`, `brand_overview`, `run_quick_audit`, `compose_article`.
 
 ### User message — English
 
-You installed the VidAU Skill, but **VidAU GEO Agent MCP is not connected yet**, so I cannot fetch metrics, write articles, or run audits.
+You installed the VidAU Skill, but **vidau-geo MCP is not connected yet**, so I cannot fetch metrics, write articles, or run audits.
 
 **Please complete these 2 steps (~2 minutes):**
 

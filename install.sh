@@ -41,7 +41,7 @@ echo ""
 
 # Skills are orchestration only — MCP is required to call VidAU APIs.
 MCP_CONFIGURED=0
-if hermes mcp list 2>/dev/null | grep -qiE 'geo\.vidau\.ai|VidAU GEO'; then
+if hermes mcp list 2>/dev/null | grep -qiE 'geo\.vidau\.ai|vidau-geo|VidAU GEO'; then
   MCP_CONFIGURED=1
 fi
 
@@ -60,7 +60,7 @@ echo ""
 echo "1. Open https://geo.vidau.ai/developer and create an API Key"
 echo "2. Connect MCP (pick one):"
 echo ""
-echo "   hermes mcp add \"VidAU GEO Agent\" \\"
+echo "   hermes mcp add vidau-geo \\"
 echo "     --url https://geo.vidau.ai/mcp \\"
 echo "     --header \"x-api-key=YOUR_KEY\""
 echo ""
@@ -74,7 +74,7 @@ if [ -r /dev/tty ]; then
 fi
 
 if [ -n "${api_key}" ]; then
-  hermes mcp add "VidAU GEO Agent" \
+  hermes mcp add vidau-geo \
     --url "https://geo.vidau.ai/mcp" \
     --header "x-api-key=${api_key}"
   echo ""

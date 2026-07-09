@@ -1,39 +1,40 @@
 #!/usr/bin/env bash
-# Install all VidAU GEO Agent skills into Hermes.
-# Usage: curl -fsSL https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.sh | bash
+# Install all VidAU GEO Agent skills into Hermes (Creative-aligned flow).
+# Usage: curl -fsSL https://geo.vidau.ai/skills/install.sh | bash
 set -euo pipefail
 
-REPO_BASE="${VIDAU_GEO_SKILLS_BASE:-https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main}"
+REPO="${VIDAU_GEO_GITHUB_REPO:-https://github.com/vidaudeveloper/Vidau-Geo-Agent.git}"
+TMP="${VIDAU_GEO_SKILL_DIR:-/tmp/vidau-geo-agent-skill}"
 
-command -v hermes >/dev/null 2>&1 || {
-  if [[ "${OS:-}" == "Windows_NT" || -n "${WINDIR:-}" ]]; then
-    echo "On Windows Hermes Desktop, use PowerShell (not curl | bash):"
-    echo "  irm https://geo.vidau.ai/skills/install.ps1 | iex"
-    echo ""
-    echo "If you use Git Bash, open a new terminal after installing Hermes so hermes is on PATH."
-  else
-    echo "Hermes CLI not found. Install Hermes first: https://hermes-agent.nousresearch.com"
-  fi
+if [[ "${OS:-}" == "Windows_NT" || -n "${WINDIR:-}" ]]; then
+  echo "On Windows Hermes Desktop, use PowerShell (not curl | bash):"
+  echo "  irm https://geo.vidau.ai/skills/install.ps1 | iex"
+  exit 1
+fi
+
+command -v node >/dev/null 2>&1 || {
+  echo "Node.js is required. Install Node 18+ then re-run this script."
+  echo "Or clone the repo and run: node scripts/install-skills.mjs --from-cdn --force"
   exit 1
 }
 
-SKILLS=(
-  vidau-geo-mcp-setup
-  vidau-geo-quick-audit
-  vidau-geo-full-audit
-  vidau-geo-brand-insights
-  vidau-geo-compose
-  vidau-geo-publish
-  vidau-geo-write-draft
-  vidau-geo-automation
-)
+command -v git >/dev/null 2>&1 || {
+  echo "Git not found. Using CDN install (no clone)..."
+  if [ ! -f "${TMP}/scripts/install-skills.mjs" ]; then
+    mkdir -p "${TMP}/scripts"
+    curl -fsSL "https://geo.vidau.ai/skills/scripts/install-skills.mjs" -o "${TMP}/scripts/install-skills.mjs"
+  fi
+  node "${TMP}/scripts/install-skills.mjs" --from-cdn --force
+  INSTALL_OK=1
+}
 
-echo "Installing ${#SKILLS[@]} VidAU GEO skills from ${REPO_BASE}..."
-
-for skill in "${SKILLS[@]}"; do
-  echo "→ ${skill}"
-  hermes skills install "${REPO_BASE}/${skill}/SKILL.md"
-done
+if [ "${INSTALL_OK:-0}" -ne 1 ]; then
+  if [ ! -d "${TMP}/.git" ]; then
+    rm -rf "${TMP}"
+    git clone --depth 1 "${REPO}" "${TMP}"
+  fi
+  node "${TMP}/scripts/install-skills.mjs" --force
+fi
 
 echo ""
 echo "Skills installed. Restart Hermes or run /reset to load them."
@@ -41,8 +42,10 @@ echo ""
 
 # Skills are orchestration only — MCP is required to call VidAU APIs.
 MCP_CONFIGURED=0
-if hermes mcp list 2>/dev/null | grep -qiE 'geo\.vidau\.ai|vidau-geo|VidAU GEO'; then
-  MCP_CONFIGURED=1
+if command -v hermes >/dev/null 2>&1; then
+  if hermes mcp list 2>/dev/null | grep -qiE 'geo\.vidau\.ai|vidau-geo|VidAU GEO'; then
+    MCP_CONFIGURED=1
+  fi
 fi
 
 if [ "$MCP_CONFIGURED" -eq 1 ]; then
@@ -71,5 +74,7 @@ echo "Then: /reload-mcp or restart Hermes."
 echo ""
 echo "Cursor / Claude Desktop still need an API key from"
 echo "https://geo.vidau.ai/developer (x-api-key header)."
+echo ""
+echo "Full setup guide: https://github.com/vidaudeveloper/Vidau-Geo-Agent/blob/main/docs/SETUP.md"
 echo ""
 exit 1

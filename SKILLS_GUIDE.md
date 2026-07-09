@@ -31,11 +31,14 @@
 
 ### 安装顺序
 
+完整一键安装提示词见 **[docs/SETUP.md](./docs/SETUP.md)**（MCP → Skills → `/reset`）。
+
 1. **连 MCP** — VidAU Agent / Hermes：写入 `vidau-geo` YAML（无需 API Key）；Cursor / Claude：在 [developer](https://geo.vidau.ai/developer) 创建 Key
 2. **装 Skills**
+   - **推荐：** `git clone` + `node scripts/install-skills.mjs --force`（不要用 raw.githubusercontent.com）
    - **macOS / Linux / Git Bash：** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
    - **Windows Hermes Desktop（PowerShell）：** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
-3. **直接对话** — 不必记工具名，Skill 会自动编排 MCP
+3. **运行 `/reset`** — 使 MCP 与 Skills 生效
 
 ### 8 个 Skill · 示例说法
 
@@ -78,11 +81,13 @@ You (natural language) → Skill (workflow) → MCP tools (API) → geo.vidau.ai
 
 ### Setup order
 
+See **[docs/SETUP.md](./docs/SETUP.md)** for the full one-click prompt (MCP → Skills → `/reset`).
+
 1. **Connect MCP** — VidAU Agent / Hermes: add `vidau-geo` YAML (no API key); Cursor / Claude: create a key at [developer](https://geo.vidau.ai/developer)
-2. **Install Skills**
+2. **Install Skills** — prefer `git clone` + `node scripts/install-skills.mjs --force` (avoid raw.githubusercontent.com)
    - **macOS / Linux / Git Bash:** `curl -fsSL https://geo.vidau.ai/skills/install.sh | bash`
    - **Windows Hermes Desktop (PowerShell):** `irm https://geo.vidau.ai/skills/install.ps1 | iex`
-3. **Talk naturally** — Skills orchestrate MCP; no need to memorize tool names
+3. **Run `/reset`** — then talk naturally; Skills orchestrate MCP
 
 ### 8 skills · example prompts
 

@@ -1,28 +1,22 @@
 #Requires -Version 5.1
-# Install all VidAU GEO Agent skills into Hermes (Windows native).
+# Install all VidAU GEO Agent skills into Hermes (Creative-aligned flow).
 # Usage:
 #   irm https://geo.vidau.ai/skills/install.ps1 | iex
-#   irm https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main/install.ps1 | iex
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$RepoBase = if ($env:VIDAU_GEO_SKILLS_BASE) {
-    $env:VIDAU_GEO_SKILLS_BASE.TrimEnd('/')
+$Repo = if ($env:VIDAU_GEO_GITHUB_REPO) {
+    $env:VIDAU_GEO_GITHUB_REPO
 } else {
-    'https://raw.githubusercontent.com/vidaudeveloper/Vidau-Geo-Agent/main'
+    'https://github.com/vidaudeveloper/Vidau-Geo-Agent.git'
 }
 
-$SkillIds = @(
-    'vidau-geo-mcp-setup',
-    'vidau-geo-quick-audit',
-    'vidau-geo-full-audit',
-    'vidau-geo-brand-insights',
-    'vidau-geo-compose',
-    'vidau-geo-publish',
-    'vidau-geo-write-draft',
-    'vidau-geo-automation'
-)
+$Tmp = if ($env:VIDAU_GEO_SKILL_DIR) {
+    $env:VIDAU_GEO_SKILL_DIR
+} else {
+    Join-Path $env:TEMP 'vidau-geo-agent-skill'
+}
 
 function Get-HermesHome {
     if ($env:HERMES_HOME) { return $env:HERMES_HOME }
@@ -36,28 +30,6 @@ function Resolve-HermesCli {
     $candidate = Join-Path (Get-HermesHome) 'hermes-agent\venv\Scripts\hermes.exe'
     if (Test-Path -LiteralPath $candidate) { return $candidate }
     return $null
-}
-
-function Invoke-Hermes {
-    param(
-        [Parameter(Mandatory)]
-        [string[]]$Args
-    )
-
-    $cli = Resolve-HermesCli
-    if (-not $cli) {
-        Write-Host 'Hermes CLI not found.' -ForegroundColor Red
-        Write-Host ''
-        Write-Host 'Install Hermes Desktop, or run the Hermes Windows installer:'
-        Write-Host '  irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1 | iex'
-        Write-Host ''
-        Write-Host 'After install, open a new PowerShell window and run this script again.'
-        Write-Host 'Docs: https://hermes-agent.nousresearch.com/docs/user-guide/windows-native'
-        exit 1
-    }
-
-    & $cli @Args
-    if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
 
 function Test-VidauMcpConfigured {
@@ -75,18 +47,49 @@ function Test-VidauMcpConfigured {
 
     if (Test-Path -LiteralPath $configPath) {
         $content = Get-Content -LiteralPath $configPath -Raw -ErrorAction SilentlyContinue
-        if ($content -match 'geo\.vidau\.ai') { return $true }
+        if ($content -match 'geo\.vidau\.ai|vidau-geo') { return $true }
     }
 
     return $false
 }
 
-Write-Host "Installing $($SkillIds.Count) VidAU GEO skills from $RepoBase..."
-
-foreach ($skill in $SkillIds) {
-    Write-Host "→ $skill"
-    Invoke-Hermes -Args @('skills', 'install', "$RepoBase/$skill/SKILL.md")
+function Ensure-Node {
+    if (Get-Command node -ErrorAction SilentlyContinue) { return }
+    Write-Host 'Node.js is required. Install Node 18+ then re-run this script.' -ForegroundColor Red
+    Write-Host 'Or run: node install-skills.mjs --from-cdn --force (after downloading the script)'
+    exit 1
 }
+
+function Install-Skills {
+    Ensure-Node
+
+    $scriptPath = Join-Path $Tmp 'scripts\install-skills.mjs'
+
+    if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+        Write-Host 'Git not found. Using CDN install (no clone)...'
+        if (-not (Test-Path -LiteralPath $scriptPath)) {
+            New-Item -ItemType Directory -Force -Path (Split-Path $scriptPath) | Out-Null
+            Invoke-WebRequest -Uri 'https://geo.vidau.ai/skills/scripts/install-skills.mjs' -OutFile $scriptPath -UseBasicParsing
+        }
+        & node $scriptPath --from-cdn --force
+        if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        return
+    }
+
+    if (-not (Test-Path -LiteralPath (Join-Path $Tmp '.git'))) {
+        if (Test-Path -LiteralPath $Tmp) {
+            Remove-Item -LiteralPath $Tmp -Recurse -Force
+        }
+        & git clone --depth 1 $Repo $Tmp
+        if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
+
+    & node $scriptPath --force
+    if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
+
+Write-Host 'Installing VidAU GEO skills (clone + local copy)...'
+Install-Skills
 
 Write-Host ''
 Write-Host 'Skills installed. Restart Hermes Desktop or run /reset to load them.'
@@ -105,7 +108,7 @@ Write-Host 'Skills do not connect to VidAU. Without MCP you cannot'
 Write-Host 'query data, write articles, or run audits.'
 Write-Host ''
 Write-Host 'VidAU Agent / Hermes Desktop — add to config.yaml'
-Write-Host "(no x-api-key; desktop injects vidau_user_id):"
+Write-Host '(no x-api-key; desktop injects vidau_user_id):'
 Write-Host ''
 Write-Host 'mcp_servers:'
 Write-Host '  vidau-geo:'
@@ -119,5 +122,7 @@ Write-Host 'Then: /reload-mcp or restart Hermes.'
 Write-Host ''
 Write-Host 'Cursor / Claude Desktop still need an API key from'
 Write-Host 'https://geo.vidau.ai/developer (x-api-key header).'
+Write-Host ''
+Write-Host 'Full setup guide: https://github.com/vidaudeveloper/Vidau-Geo-Agent/blob/main/docs/SETUP.md'
 Write-Host ''
 exit 1

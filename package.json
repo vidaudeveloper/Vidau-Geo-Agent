@@ -1,0 +1,24 @@
+{
+  "name": "vidau-geo-agent-skill",
+  "version": "1.1.6",
+  "private": false,
+  "type": "module",
+  "description": "VidAU GEO Agent Skill package (standalone repo)",
+  "scripts": {
+    "skills:install": "node scripts/install-skills.mjs --force"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vidaudeveloper/Vidau-Geo-Agent.git"
+  },
+  "keywords": [
+    "vidau",
+    "geo-agent",
+    "skill",
+    "mcp"
+  ],
+  "license": "MIT"
+}
